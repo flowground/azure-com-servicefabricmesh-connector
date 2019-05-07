@@ -1,0 +1,662 @@
+{
+    "title": "SeaBreezeManagementClient",
+    "description": "APIs to deploy and manage resources to SeaBreeze.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/servicefabricmesh/2018-09-01-preview/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "Operations_List": {
+            "main": "./lib/actions/Operations_List.js",
+            "title": "Lists all of the available operations.",
+            "description": "Lists all the available operations provided by Service Fabric SeaBreeze resource provider.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Operations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Application_ListBySubscription": {
+            "main": "./lib/actions/Application_ListBySubscription.js",
+            "title": "Gets all the application resources in a given subscription.",
+            "description": "Gets the information about all application resources in a given resource group. The information include the description and other properties of the application.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Application_ListBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Gateway_ListBySubscription": {
+            "main": "./lib/actions/Gateway_ListBySubscription.js",
+            "title": "Gets all the gateway resources in a given subscription.",
+            "description": "Gets the information about all gateway resources in a given resource group. The information include the description and other properties of the gateway.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Gateway_ListBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Network_ListBySubscription": {
+            "main": "./lib/actions/Network_ListBySubscription.js",
+            "title": "Gets all the network resources in a given subscription.",
+            "description": "Gets the information about all network resources in a given resource group. The information include the description and other properties of the network.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Network_ListBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Secret_ListBySubscription": {
+            "main": "./lib/actions/Secret_ListBySubscription.js",
+            "title": "Gets all the secret resources in a given subscription.",
+            "description": "Gets the information about all secret resources in a given resource group. The information include the description and other properties of the secret.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Secret_ListBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Volume_ListBySubscription": {
+            "main": "./lib/actions/Volume_ListBySubscription.js",
+            "title": "Gets all the volume resources in a given subscription.",
+            "description": "Gets the information about all volume resources in a given resource group. The information include the description and other properties of the volume.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Volume_ListBySubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Application_ListByResourceGroup": {
+            "main": "./lib/actions/Application_ListByResourceGroup.js",
+            "title": "Gets all the application resources in a given resource group.",
+            "description": "Gets the information about all application resources in a given resource group. The information include the description and other properties of the Application.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Application_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Application_Delete": {
+            "main": "./lib/actions/Application_Delete.js",
+            "title": "Deletes the application resource.",
+            "description": "Deletes the application resource identified by the name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Application_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Application_Get": {
+            "main": "./lib/actions/Application_Get.js",
+            "title": "Gets the application resource with the given name.",
+            "description": "Gets the information about the application resource with the given name. The information include the description and other properties of the application.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Application_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Application_Create": {
+            "main": "./lib/actions/Application_Create.js",
+            "title": "Creates or updates an application resource.",
+            "description": "Creates an application resource with the specified name, description and properties. If an application resource with the same name exists, then it is updated with the specified description and properties.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Application_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Service_List": {
+            "main": "./lib/actions/Service_List.js",
+            "title": "Lists all the service resources.",
+            "description": "Gets the information about all services of an application resource. The information include the description and other properties of the Service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Service_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Service_Get": {
+            "main": "./lib/actions/Service_Get.js",
+            "title": "Gets the service resource with the given name.",
+            "description": "Gets the information about the service resource with the given name. The information include the description and other properties of the service.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Service_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ServiceReplica_List": {
+            "main": "./lib/actions/ServiceReplica_List.js",
+            "title": "Gets replicas of a given service.",
+            "description": "Gets the information about all replicas of a given service of an application. The information includes the runtime properties of the replica instance.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ServiceReplica_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ServiceReplica_Get": {
+            "main": "./lib/actions/ServiceReplica_Get.js",
+            "title": "Gets the given replica of the service of an application.",
+            "description": "Gets the information about the service replica with the given name. The information include the description and other properties of the service replica.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ServiceReplica_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CodePackage_GetContainerLogs": {
+            "main": "./lib/actions/CodePackage_GetContainerLogs.js",
+            "title": "Gets the logs from the container.",
+            "description": "Gets the logs for the container of the specified code package of the service replica.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CodePackage_GetContainerLogs.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Gateway_ListByResourceGroup": {
+            "main": "./lib/actions/Gateway_ListByResourceGroup.js",
+            "title": "Gets all the gateway resources in a given resource group.",
+            "description": "Gets the information about all gateway resources in a given resource group. The information include the description and other properties of the Gateway.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Gateway_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Gateway_Delete": {
+            "main": "./lib/actions/Gateway_Delete.js",
+            "title": "Deletes the gateway resource.",
+            "description": "Deletes the gateway resource identified by the name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Gateway_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Gateway_Get": {
+            "main": "./lib/actions/Gateway_Get.js",
+            "title": "Gets the gateway resource with the given name.",
+            "description": "Gets the information about the gateway resource with the given name. The information include the description and other properties of the gateway.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Gateway_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Gateway_Create": {
+            "main": "./lib/actions/Gateway_Create.js",
+            "title": "Creates or updates a gateway resource.",
+            "description": "Creates a gateway resource with the specified name, description and properties. If a gateway resource with the same name exists, then it is updated with the specified description and properties. Use gateway resources to create a gateway for public connectivity for services within your application.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Gateway_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Network_ListByResourceGroup": {
+            "main": "./lib/actions/Network_ListByResourceGroup.js",
+            "title": "Gets all the network resources in a given resource group.",
+            "description": "Gets the information about all network resources in a given resource group. The information include the description and other properties of the Network.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Network_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Network_Delete": {
+            "main": "./lib/actions/Network_Delete.js",
+            "title": "Deletes the network resource.",
+            "description": "Deletes the network resource identified by the name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Network_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Network_Get": {
+            "main": "./lib/actions/Network_Get.js",
+            "title": "Gets the network resource with the given name.",
+            "description": "Gets the information about the network resource with the given name. The information include the description and other properties of the network.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Network_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Network_Create": {
+            "main": "./lib/actions/Network_Create.js",
+            "title": "Creates or updates a network resource.",
+            "description": "Creates a network resource with the specified name, description and properties. If a network resource with the same name exists, then it is updated with the specified description and properties.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Network_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Secret_ListByResourceGroup": {
+            "main": "./lib/actions/Secret_ListByResourceGroup.js",
+            "title": "Gets all the secret resources in a given resource group.",
+            "description": "Gets the information about all secret resources in a given resource group. The information include the description and other properties of the Secret.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Secret_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Secret_Delete": {
+            "main": "./lib/actions/Secret_Delete.js",
+            "title": "Deletes the secret resource.",
+            "description": "Deletes the secret resource identified by the name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Secret_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Secret_Get": {
+            "main": "./lib/actions/Secret_Get.js",
+            "title": "Gets the secret resource with the given name.",
+            "description": "Gets the information about the secret resource with the given name. The information include the description and other properties of the secret.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Secret_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Secret_Create": {
+            "main": "./lib/actions/Secret_Create.js",
+            "title": "Creates or updates a secret resource.",
+            "description": "Creates a secret resource with the specified name, description and properties. If a secret resource with the same name exists, then it is updated with the specified description and properties.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Secret_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SecretValue_List": {
+            "main": "./lib/actions/SecretValue_List.js",
+            "title": "List names of all values of the specified secret resource.",
+            "description": "Gets information about all secret value resources of the specified secret resource. The information includes the names of the secret value resources, but not the actual values.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SecretValue_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SecretValue_Delete": {
+            "main": "./lib/actions/SecretValue_Delete.js",
+            "title": "Deletes the specified  value of the named secret resource.",
+            "description": "Deletes the secret value resource identified by the name. The name of the resource is typically the version associated with that value. Deletion will fail if the specified value is in use.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SecretValue_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SecretValue_Get": {
+            "main": "./lib/actions/SecretValue_Get.js",
+            "title": "Gets the specified secret value resource.",
+            "description": "Get the information about the specified named secret value resources. The information does not include the actual value of the secret.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SecretValue_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SecretValue_Create": {
+            "main": "./lib/actions/SecretValue_Create.js",
+            "title": "Adds the specified value as a new version of the specified secret resource.",
+            "description": "Creates a new value of the specified secret resource. The name of the value is typically the version identifier. Once created the value cannot be changed.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SecretValue_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "SecretValue_ListValue": {
+            "main": "./lib/actions/SecretValue_ListValue.js",
+            "title": "Lists the specified value of the secret resource.",
+            "description": "Lists the decrypted value of the specified named value of the secret resource. This is a privileged operation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/SecretValue_ListValue.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Volume_ListByResourceGroup": {
+            "main": "./lib/actions/Volume_ListByResourceGroup.js",
+            "title": "Gets all the volume resources in a given resource group.",
+            "description": "Gets the information about all volume resources in a given resource group. The information include the description and other properties of the Volume.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Volume_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Volume_Delete": {
+            "main": "./lib/actions/Volume_Delete.js",
+            "title": "Deletes the volume resource.",
+            "description": "Deletes the volume resource identified by the name.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Volume_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Volume_Get": {
+            "main": "./lib/actions/Volume_Get.js",
+            "title": "Gets the volume resource with the given name.",
+            "description": "Gets the information about the volume resource with the given name. The information include the description and other properties of the volume.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Volume_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Volume_Create": {
+            "main": "./lib/actions/Volume_Create.js",
+            "title": "Creates or updates a volume resource.",
+            "description": "Creates a volume resource with the specified name, description and properties. If a volume resource with the same name exists, then it is updated with the specified description and properties.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Volume_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

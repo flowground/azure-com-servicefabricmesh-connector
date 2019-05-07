@@ -1,0 +1,33 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "applicationResourceName": {
+            "required": true,
+            "type": "string"
+        },
+        "serviceResourceName": {
+            "required": true,
+            "type": "string"
+        },
+        "replicaName": {
+            "required": true,
+            "type": "string"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "2018-09-01-preview"
+            ],
+            "default": "2018-09-01-preview"
+        }
+    }
+}

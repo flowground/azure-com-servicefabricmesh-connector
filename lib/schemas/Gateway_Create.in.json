@@ -1,0 +1,429 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "gatewayResourceName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "The resource model definition for Azure Resource Manager resource.",
+                            "properties": {
+                                "id": {
+                                    "description": "Fully qualified identifier for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+                                    "readOnly": true,
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read"
+                                    ]
+                                },
+                                "name": {
+                                    "description": "The name of the resource",
+                                    "readOnly": true,
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read"
+                                    ]
+                                },
+                                "type": {
+                                    "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.",
+                                    "readOnly": true,
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read"
+                                    ]
+                                }
+                            },
+                            "x-ms-azure-resource": true,
+                            "type": "object"
+                        }
+                    ],
+                    "description": "The resource model definition for Azure Resource Manager tracked top-level resource.",
+                    "properties": {
+                        "location": {
+                            "description": "The geo-location where the resource lives",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags.",
+                            "type": "object",
+                            "x-ms-mutability": [
+                                "read",
+                                "create",
+                                "update"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "type": "object"
+                }
+            ],
+            "description": "This type describes a gateway resource.",
+            "properties": {
+                "properties": {
+                    "description": "This type describes properties of a gateway resource.",
+                    "x-ms-client-flatten": true,
+                    "allOf": [
+                        {
+                            "description": "Describes common properties of a provisioned resource.",
+                            "properties": {
+                                "provisioningState": {
+                                    "description": "State of the resource.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "description": "Describes properties of a gateway resource.",
+                            "properties": {
+                                "description": {
+                                    "description": "User readable description of the gateway.",
+                                    "type": "string"
+                                },
+                                "destinationNetwork": {
+                                    "description": "Network that the Application is using.",
+                                    "properties": {
+                                        "endpointRefs": {
+                                            "description": "A list of endpoints that are exposed on this network.",
+                                            "items": {
+                                                "description": "Describes a reference to a service endpoint.",
+                                                "properties": {
+                                                    "name": {
+                                                        "description": "Name of the endpoint.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "name": {
+                                            "description": "Name of the network",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "http": {
+                                    "description": "Configuration for http connectivity for this gateway.",
+                                    "items": {
+                                        "description": "Describes the http configuration for external connectivity for this network.",
+                                        "properties": {
+                                            "hosts": {
+                                                "description": "description for routing.",
+                                                "items": {
+                                                    "description": "Describes the hostname properties for http routing.",
+                                                    "properties": {
+                                                        "name": {
+                                                            "description": "http hostname config name.",
+                                                            "type": "string"
+                                                        },
+                                                        "routes": {
+                                                            "description": "Route information to use for routing. Routes are processed in the order they are specified. Specify routes that are more specific before routes that can handle general cases.",
+                                                            "items": {
+                                                                "description": "Describes the hostname properties for http routing.",
+                                                                "properties": {
+                                                                    "destination": {
+                                                                        "description": "Describes destination endpoint for routing traffic.",
+                                                                        "properties": {
+                                                                            "applicationName": {
+                                                                                "description": "Name of the service fabric Mesh application.",
+                                                                                "type": "string"
+                                                                            },
+                                                                            "endpointName": {
+                                                                                "description": "name of the endpoint in the service.",
+                                                                                "type": "string"
+                                                                            },
+                                                                            "serviceName": {
+                                                                                "description": "service that contains the endpoint.",
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "applicationName",
+                                                                            "endpointName",
+                                                                            "serviceName"
+                                                                        ],
+                                                                        "type": "object"
+                                                                    },
+                                                                    "match": {
+                                                                        "description": "Describes a rule for http route matching.",
+                                                                        "properties": {
+                                                                            "headers": {
+                                                                                "description": "headers and their values to match in request.",
+                                                                                "items": {
+                                                                                    "description": "Describes header information for http route matching.",
+                                                                                    "properties": {
+                                                                                        "name": {
+                                                                                            "description": "Name of header to match in request.",
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "type": {
+                                                                                            "description": "how to match header value",
+                                                                                            "enum": [
+                                                                                                "exact"
+                                                                                            ],
+                                                                                            "type": "string",
+                                                                                            "x-ms-enum": {
+                                                                                                "modelAsString": true,
+                                                                                                "name": "HeaderMatchType"
+                                                                                            }
+                                                                                        },
+                                                                                        "value": {
+                                                                                            "description": "Value of header to match in request.",
+                                                                                            "type": "string"
+                                                                                        }
+                                                                                    },
+                                                                                    "required": [
+                                                                                        "name"
+                                                                                    ],
+                                                                                    "type": "object"
+                                                                                },
+                                                                                "type": "array"
+                                                                            },
+                                                                            "path": {
+                                                                                "description": "Path to match for routing.",
+                                                                                "properties": {
+                                                                                    "rewrite": {
+                                                                                        "description": "replacement string for matched part of the Uri.",
+                                                                                        "type": "string"
+                                                                                    },
+                                                                                    "type": {
+                                                                                        "description": "how to match value in the Uri",
+                                                                                        "enum": [
+                                                                                            "prefix"
+                                                                                        ],
+                                                                                        "type": "string",
+                                                                                        "x-ms-enum": {
+                                                                                            "modelAsString": true,
+                                                                                            "name": "PathMatchType"
+                                                                                        }
+                                                                                    },
+                                                                                    "value": {
+                                                                                        "description": "Uri path to match for request.",
+                                                                                        "type": "string"
+                                                                                    }
+                                                                                },
+                                                                                "required": [
+                                                                                    "type",
+                                                                                    "value"
+                                                                                ],
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "required": [
+                                                                            "path"
+                                                                        ],
+                                                                        "type": "object"
+                                                                    },
+                                                                    "name": {
+                                                                        "description": "http route name.",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "required": [
+                                                                    "destination",
+                                                                    "match",
+                                                                    "name"
+                                                                ],
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "name",
+                                                        "routes"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "name": {
+                                                "description": "http gateway config name.",
+                                                "type": "string"
+                                            },
+                                            "port": {
+                                                "description": "Specifies the port at which the service endpoint below needs to be exposed.",
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "required": [
+                                            "hosts",
+                                            "name",
+                                            "port"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                },
+                                "ipAddress": {
+                                    "description": "IP address of the gateway. This is populated in the response and is ignored for incoming requests.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "sourceNetwork": {
+                                    "description": "Network the gateway should listen on for requests.",
+                                    "properties": {
+                                        "endpointRefs": {
+                                            "description": "A list of endpoints that are exposed on this network.",
+                                            "items": {
+                                                "description": "Describes a reference to a service endpoint.",
+                                                "properties": {
+                                                    "name": {
+                                                        "description": "Name of the endpoint.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        },
+                                        "name": {
+                                            "description": "Name of the network",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "status": {
+                                    "description": "Status of the resource.",
+                                    "readOnly": true,
+                                    "enum": [
+                                        "Unknown",
+                                        "Ready",
+                                        "Upgrading",
+                                        "Creating",
+                                        "Deleting",
+                                        "Failed"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "ResourceStatus",
+                                        "values": [
+                                            {
+                                                "description": "Indicates the resource status is unknown. The value is zero.",
+                                                "value": "Unknown"
+                                            },
+                                            {
+                                                "description": "Indicates the resource is ready. The value is 1.",
+                                                "value": "Ready"
+                                            },
+                                            {
+                                                "description": "Indicates the resource is upgrading. The value is 2.",
+                                                "value": "Upgrading"
+                                            },
+                                            {
+                                                "description": "Indicates the resource is being created. The value is 3.",
+                                                "value": "Creating"
+                                            },
+                                            {
+                                                "description": "Indicates the resource is being deleted. The value is 4.",
+                                                "value": "Deleting"
+                                            },
+                                            {
+                                                "description": "Indicates the resource is not functional due to persistent failures. See statusDetails property for more details. The value is 5.",
+                                                "value": "Failed"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "statusDetails": {
+                                    "description": "Gives additional information about the current status of the gateway.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                },
+                                "tcp": {
+                                    "description": "Configuration for tcp connectivity for this gateway.",
+                                    "items": {
+                                        "description": "Describes the tcp configuration for external connectivity for this network.",
+                                        "properties": {
+                                            "destination": {
+                                                "description": "Describes destination endpoint for routing traffic.",
+                                                "properties": {
+                                                    "applicationName": {
+                                                        "description": "Name of the service fabric Mesh application.",
+                                                        "type": "string"
+                                                    },
+                                                    "endpointName": {
+                                                        "description": "name of the endpoint in the service.",
+                                                        "type": "string"
+                                                    },
+                                                    "serviceName": {
+                                                        "description": "service that contains the endpoint.",
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "applicationName",
+                                                    "endpointName",
+                                                    "serviceName"
+                                                ],
+                                                "type": "object"
+                                            },
+                                            "name": {
+                                                "description": "tcp gateway config name.",
+                                                "type": "string"
+                                            },
+                                            "port": {
+                                                "description": "Specifies the port at which the service endpoint below needs to be exposed.",
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "required": [
+                                            "destination",
+                                            "name",
+                                            "port"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "destinationNetwork",
+                                "sourceNetwork"
+                            ],
+                            "type": "object"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "properties"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "2018-09-01-preview"
+            ],
+            "default": "2018-09-01-preview"
+        }
+    }
+}

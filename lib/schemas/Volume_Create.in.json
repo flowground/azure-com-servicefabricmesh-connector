@@ -1,0 +1,215 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "volumeResourceName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "The resource model definition for Azure Resource Manager resource.",
+                            "properties": {
+                                "id": {
+                                    "description": "Fully qualified identifier for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+                                    "readOnly": true,
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read"
+                                    ]
+                                },
+                                "name": {
+                                    "description": "The name of the resource",
+                                    "readOnly": true,
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read"
+                                    ]
+                                },
+                                "type": {
+                                    "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.",
+                                    "readOnly": true,
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read"
+                                    ]
+                                }
+                            },
+                            "x-ms-azure-resource": true,
+                            "type": "object"
+                        }
+                    ],
+                    "description": "The resource model definition for Azure Resource Manager tracked top-level resource.",
+                    "properties": {
+                        "location": {
+                            "description": "The geo-location where the resource lives",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags.",
+                            "type": "object",
+                            "x-ms-mutability": [
+                                "read",
+                                "create",
+                                "update"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "type": "object"
+                }
+            ],
+            "description": "This type describes a volume resource.",
+            "properties": {
+                "properties": {
+                    "description": "This type describes properties of a volume resource.",
+                    "x-ms-client-flatten": true,
+                    "allOf": [
+                        {
+                            "description": "Describes common properties of a provisioned resource.",
+                            "properties": {
+                                "provisioningState": {
+                                    "description": "State of the resource.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "description": "Describes properties of a volume resource.",
+                            "properties": {
+                                "azureFileParameters": {
+                                    "description": "This type describes a volume provided by an Azure Files file share.",
+                                    "properties": {
+                                        "accountKey": {
+                                            "description": "Access key of the Azure storage account for the File Share.",
+                                            "type": "string"
+                                        },
+                                        "accountName": {
+                                            "description": "Name of the Azure storage account for the File Share.",
+                                            "type": "string"
+                                        },
+                                        "shareName": {
+                                            "description": "Name of the Azure Files file share that provides storage for the volume.",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "accountName",
+                                        "shareName"
+                                    ],
+                                    "type": "object"
+                                },
+                                "description": {
+                                    "description": "User readable description of the volume.",
+                                    "type": "string"
+                                },
+                                "provider": {
+                                    "description": "Provider of the volume.",
+                                    "enum": [
+                                        "SFAzureFile"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "VolumeProvider",
+                                        "values": [
+                                            {
+                                                "description": "Provides volumes that are backed by Azure Files.",
+                                                "value": "SFAzureFile"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "status": {
+                                    "description": "Status of the volume.",
+                                    "readOnly": true,
+                                    "enum": [
+                                        "Unknown",
+                                        "Ready",
+                                        "Upgrading",
+                                        "Creating",
+                                        "Deleting",
+                                        "Failed"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "ResourceStatus",
+                                        "values": [
+                                            {
+                                                "description": "Indicates the resource status is unknown. The value is zero.",
+                                                "value": "Unknown"
+                                            },
+                                            {
+                                                "description": "Indicates the resource is ready. The value is 1.",
+                                                "value": "Ready"
+                                            },
+                                            {
+                                                "description": "Indicates the resource is upgrading. The value is 2.",
+                                                "value": "Upgrading"
+                                            },
+                                            {
+                                                "description": "Indicates the resource is being created. The value is 3.",
+                                                "value": "Creating"
+                                            },
+                                            {
+                                                "description": "Indicates the resource is being deleted. The value is 4.",
+                                                "value": "Deleting"
+                                            },
+                                            {
+                                                "description": "Indicates the resource is not functional due to persistent failures. See statusDetails property for more details. The value is 5.",
+                                                "value": "Failed"
+                                            }
+                                        ]
+                                    }
+                                },
+                                "statusDetails": {
+                                    "description": "Gives additional information about the current status of the volume.",
+                                    "readOnly": true,
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "provider"
+                            ],
+                            "type": "object"
+                        }
+                    ]
+                }
+            },
+            "required": [
+                "properties"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "2018-09-01-preview"
+            ],
+            "default": "2018-09-01-preview"
+        }
+    }
+}

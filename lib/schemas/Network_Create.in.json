@@ -1,0 +1,200 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "resourceGroupName": {
+            "required": true,
+            "type": "string"
+        },
+        "networkResourceName": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "allOf": [
+                {
+                    "allOf": [
+                        {
+                            "description": "The resource model definition for Azure Resource Manager resource.",
+                            "properties": {
+                                "id": {
+                                    "description": "Fully qualified identifier for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+                                    "readOnly": true,
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read"
+                                    ]
+                                },
+                                "name": {
+                                    "description": "The name of the resource",
+                                    "readOnly": true,
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read"
+                                    ]
+                                },
+                                "type": {
+                                    "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.",
+                                    "readOnly": true,
+                                    "type": "string",
+                                    "x-ms-mutability": [
+                                        "read"
+                                    ]
+                                }
+                            },
+                            "x-ms-azure-resource": true,
+                            "type": "object"
+                        }
+                    ],
+                    "description": "The resource model definition for Azure Resource Manager tracked top-level resource.",
+                    "properties": {
+                        "location": {
+                            "description": "The geo-location where the resource lives",
+                            "type": "string",
+                            "x-ms-mutability": [
+                                "read",
+                                "create"
+                            ]
+                        },
+                        "tags": {
+                            "additionalProperties": {
+                                "type": "string"
+                            },
+                            "description": "Resource tags.",
+                            "type": "object",
+                            "x-ms-mutability": [
+                                "read",
+                                "create",
+                                "update"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "location"
+                    ],
+                    "type": "object"
+                }
+            ],
+            "description": "This type describes a network resource.",
+            "properties": {
+                "properties": {
+                    "description": "Describes properties of a network resource.",
+                    "allOf": [
+                        {
+                            "allOf": [
+                                {
+                                    "description": "Describes common properties of a provisioned resource.",
+                                    "properties": {
+                                        "provisioningState": {
+                                            "description": "State of the resource.",
+                                            "readOnly": true,
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            ],
+                            "description": "This type describes the properties of a network resource, including its kind.",
+                            "discriminator": {
+                                "propertyName": "kind"
+                            },
+                            "properties": {
+                                "kind": {
+                                    "description": "The type of a Service Fabric container network.",
+                                    "enum": [
+                                        "Local"
+                                    ],
+                                    "type": "string",
+                                    "x-ms-enum": {
+                                        "modelAsString": true,
+                                        "name": "NetworkKind",
+                                        "values": [
+                                            {
+                                                "description": "Indicates a container network local to a single Service Fabric cluster. The value is 1.",
+                                                "value": "Local"
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "required": [
+                                "kind"
+                            ],
+                            "type": "object"
+                        }
+                    ],
+                    "properties": {
+                        "description": {
+                            "description": "User readable description of the network.",
+                            "type": "string"
+                        },
+                        "status": {
+                            "description": "Status of the network.",
+                            "readOnly": true,
+                            "enum": [
+                                "Unknown",
+                                "Ready",
+                                "Upgrading",
+                                "Creating",
+                                "Deleting",
+                                "Failed"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "ResourceStatus",
+                                "values": [
+                                    {
+                                        "description": "Indicates the resource status is unknown. The value is zero.",
+                                        "value": "Unknown"
+                                    },
+                                    {
+                                        "description": "Indicates the resource is ready. The value is 1.",
+                                        "value": "Ready"
+                                    },
+                                    {
+                                        "description": "Indicates the resource is upgrading. The value is 2.",
+                                        "value": "Upgrading"
+                                    },
+                                    {
+                                        "description": "Indicates the resource is being created. The value is 3.",
+                                        "value": "Creating"
+                                    },
+                                    {
+                                        "description": "Indicates the resource is being deleted. The value is 4.",
+                                        "value": "Deleting"
+                                    },
+                                    {
+                                        "description": "Indicates the resource is not functional due to persistent failures. See statusDetails property for more details. The value is 5.",
+                                        "value": "Failed"
+                                    }
+                                ]
+                            }
+                        },
+                        "statusDetails": {
+                            "description": "Gives additional information about the current status of the network.",
+                            "readOnly": true,
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "required": [
+                "properties"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string",
+            "enum": [
+                "2018-09-01-preview"
+            ],
+            "default": "2018-09-01-preview"
+        }
+    }
+}
